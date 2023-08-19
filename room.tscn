@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyaj60uqwcj6n"]
+
+[ext_resource type="Texture2D" uid="uid://y0ihha8kperw" path="res://background.png" id="1_mbg4h"]
+[ext_resource type="Script" path="res://Door.gd" id="2_fws3o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgpxk"]
+size = Vector2(176, 63)
+
+[node name="Room" type="Sprite2D"]
+position = Vector2(640, 360)
+texture = ExtResource("1_mbg4h")
+
+[node name="North Wall" type="StaticBody2D" parent="."]
+position = Vector2(-642, -364)
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="North Wall"]
+polygon = PackedVector2Array(4, 1, 1281, 1, 1164, 105, 759, 103, 760, 57, 526, 55, 526, 107, 111, 105)
+
+[node name="South Wall" type="StaticBody2D" parent="."]
+position = Vector2(-642, -364)
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="South Wall"]
+position = Vector2(1282, 718)
+rotation = 3.14159
+polygon = PackedVector2Array(4, 1, 1281, 1, 1164, 105, 759, 103, 760, 57, 526, 55, 526, 107, 111, 105)
+
+[node name="East Wall" type="StaticBody2D" parent="."]
+position = Vector2(-642, -364)
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="East Wall"]
+position = Vector2(1275, 22)
+rotation = 1.5708
+scale = Vector2(0.520801, 1)
+polygon = PackedVector2Array(-16.2556, -2, 1347.44, -6.00001, 1164, 105, 775.728, 112, 781.488, 53, 397.465, 51, 410.905, 108, 149.37, 108)
+
+[node name="West Wall" type="StaticBody2D" parent="."]
+position = Vector2(-642, -364)
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="West Wall"]
+position = Vector2(6, 697.496)
+rotation = 4.71239
+scale = Vector2(0.520801, 1)
+polygon = PackedVector2Array(-16.2556, -2, 1347.44, -6.00001, 1164, 105, 885.07, 104, 888.784, 58, 511.704, 53, 525.145, 106, 149.37, 108)
+
+[node name="North Door" type="Area2D" parent="."]
+position = Vector2(-114, -302)
+collision_mask = 2
+script = ExtResource("2_fws3o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="North Door"]
+position = Vector2(108, 21.5)
+shape = SubResource("RectangleShape2D_jgpxk")
+
+[node name="South Door" type="Area2D" parent="."]
+position = Vector2(-113, 249)
+collision_mask = 2
+script = ExtResource("2_fws3o")
+transition_direction = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="South Door"]
+position = Vector2(108, 21.5)
+shape = SubResource("RectangleShape2D_jgpxk")
+
+[node name="East Door" type="Area2D" parent="."]
+position = Vector2(541, -36)
+collision_mask = 2
+script = ExtResource("2_fws3o")
+transition_direction = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="East Door"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_jgpxk")
+
+[node name="West Door" type="Area2D" parent="."]
+position = Vector2(-543, -36)
+collision_mask = 2
+script = ExtResource("2_fws3o")
+transition_direction = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="West Door"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_jgpxk")
+
+[connection signal="body_entered" from="North Door" to="North Door" method="_on_body_entered"]
+[connection signal="body_entered" from="South Door" to="South Door" method="_on_body_entered"]
+[connection signal="body_entered" from="East Door" to="East Door" method="_on_body_entered"]
+[connection signal="body_entered" from="West Door" to="West Door" method="_on_body_entered"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://6g00qcrwox4u"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_6qmf5"]
+[ext_resource type="Script" path="res://Player.gd" id="2_04aop"]
+[ext_resource type="Texture2D" uid="uid://cq652e71rb2g6" path="res://icon.svg" id="2_dtey3"]
+[ext_resource type="PackedScene" uid="uid://dyaj60uqwcj6n" path="res://room.tscn" id="2_ngydi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pv11v"]
+size = Vector2(126, 131)
+
+[node name="World" type="Node"]
+script = ExtResource("1_6qmf5")
+room_template = ExtResource("2_ngydi")
+
+[node name="Room" parent="." instance=ExtResource("2_ngydi")]
+
+[node name="Player" type="CharacterBody2D" parent="Room"]
+position = Vector2(-312, 18)
+collision_layer = 2
+script = ExtResource("2_04aop")
+speed = 300
+
+[node name="Sprite2D" type="Sprite2D" parent="Room/Player"]
+texture = ExtResource("2_dtey3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Room/Player"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_pv11v")
